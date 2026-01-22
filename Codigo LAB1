@@ -1,0 +1,101 @@
+/*
+ * Lab1.c
+ *
+ * Created: 15/1/2026
+ * Author: Santiago Valdez Acuña
+ * Description: Implementacion de boton de inicio de carrera
+ */ 
+/****************************************/
+// Encabezado (Libraries)
+#include <avr/io.h>
+#include <avr/interrupt.h>
+// Nombres variables
+uint8_t display[] = {0x77, 0x42, 0x6D, 0x6B, 0x5A, 0x3B};
+volatile uint8_t countdown_active = 0;
+volatile int8_t countdown_value = 5;
+volatile uint16_t tick_1s = 0;
+volatile uint8_t button_prev = 1;
+/****************************************/	
+// Function prototypes
+void setup(void);
+void display_number(uint8_t num);
+/****************************************/
+// Main Function
+int main(void)
+{
+	setup();		// configurar MCU
+	while (1)
+	{
+		uint8_t button_now = (PIND & (1 << PD7));
+
+		// Detectar flanco de bajada
+		if (button_prev && !button_now && !countdown_active)
+		{
+			countdown_active = 1;
+			countdown_value = 5;
+			display_number(countdown_value);
+		}
+
+		button_prev = button_now;
+
+		// Aquí luego va la lógica de los jugadores
+	}
+}
+/****************************************/
+// NON-Interrupt subroutines
+void setup(void)
+{
+	cli();								// Desactivar interrupciones globales
+
+	// Configurar PD0–PD6 salida (display)
+	DDRD = 0x7F;
+
+	// Configurar PD7 entrada con pull-up
+	DDRD &= ~(1 << PD7);
+	PORTD |= (1 << PD7);
+
+	// Timer0 – modo normal
+	TCCR0A = 0x00;
+	TCCR0B = (1 << CS02) | (1 << CS00); // Prescaler 1024
+	TIMSK0 = (1 << TOIE0);              // Habilitar overflow
+
+	// Display inicia en 0
+	display_number(0);
+
+	sei();								// Habilitar interrupciones globales
+}
+/****************************************/
+// Mostrar número en display
+void display_number(uint8_t num)
+{
+	if (num <= 5)
+	{
+		PORTD = display[num];
+	}
+}
+
+/****************************************/
+// ISR Timer0 Overflow (~16.38 ms)
+ISR(TIMER0_OVF_vect)
+{
+	if (countdown_active)
+	{
+		tick_1s++;
+
+		// 61 overflows ? 1 segundo
+		if (tick_1s >= 61)
+		{
+			tick_1s = 0;
+			countdown_value--;
+
+			if (countdown_value >= 0)
+			{
+				display_number(countdown_value);
+			}
+			else
+			{
+				countdown_active = 0;  // Fin del conteo
+			}
+		}
+	}
+}
