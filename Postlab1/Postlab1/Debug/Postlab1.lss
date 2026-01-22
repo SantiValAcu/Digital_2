@@ -1,0 +1,609 @@
+
+Postlab1.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000006  00800100  00000336  000003ca  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000336  00000000  00000000  00000094  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          0000000e  00800106  00800106  000003d0  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000003d0  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  00000400  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 000000b0  00000000  00000000  00000440  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000d5f  00000000  00000000  000004f0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 000008fa  00000000  00000000  0000124f  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   00000654  00000000  00000000  00001b49  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000140  00000000  00000000  000021a0  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    000004b7  00000000  00000000  000022e0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    0000020b  00000000  00000000  00002797  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000070  00000000  00000000  000029a2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   8:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+   c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  10:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  14:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  18:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  1c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  20:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  24:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  28:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  2c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  30:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  34:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  38:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  3c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  40:	0c 94 47 01 	jmp	0x28e	; 0x28e <__vector_16>
+  44:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  48:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  4c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  50:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  54:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  58:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  5c:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  60:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+  64:	0c 94 51 00 	jmp	0xa2	; 0xa2 <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_copy_data>:
+  74:	11 e0       	ldi	r17, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	e6 e3       	ldi	r30, 0x36	; 54
+  7c:	f3 e0       	ldi	r31, 0x03	; 3
+  7e:	02 c0       	rjmp	.+4      	; 0x84 <__do_copy_data+0x10>
+  80:	05 90       	lpm	r0, Z+
+  82:	0d 92       	st	X+, r0
+  84:	a6 30       	cpi	r26, 0x06	; 6
+  86:	b1 07       	cpc	r27, r17
+  88:	d9 f7       	brne	.-10     	; 0x80 <__do_copy_data+0xc>
+
+0000008a <__do_clear_bss>:
+  8a:	21 e0       	ldi	r18, 0x01	; 1
+  8c:	a6 e0       	ldi	r26, 0x06	; 6
+  8e:	b1 e0       	ldi	r27, 0x01	; 1
+  90:	01 c0       	rjmp	.+2      	; 0x94 <.do_clear_bss_start>
+
+00000092 <.do_clear_bss_loop>:
+  92:	1d 92       	st	X+, r1
+
+00000094 <.do_clear_bss_start>:
+  94:	a4 31       	cpi	r26, 0x14	; 20
+  96:	b2 07       	cpc	r27, r18
+  98:	e1 f7       	brne	.-8      	; 0x92 <.do_clear_bss_loop>
+  9a:	0e 94 84 00 	call	0x108	; 0x108 <main>
+  9e:	0c 94 99 01 	jmp	0x332	; 0x332 <_exit>
+
+000000a2 <__bad_interrupt>:
+  a2:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+000000a6 <display_show>:
+};
+
+// Funcion para mostrar los numeros en display
+void display_show(uint8_t num)
+{
+	if (num <= 5)				//si variable num es menor o igual mostrar e display
+  a6:	86 30       	cpi	r24, 0x06	; 6
+  a8:	30 f4       	brcc	.+12     	; 0xb6 <display_show+0x10>
+	PORTD = display_table[num];
+  aa:	e8 2f       	mov	r30, r24
+  ac:	f0 e0       	ldi	r31, 0x00	; 0
+  ae:	e0 50       	subi	r30, 0x00	; 0
+  b0:	ff 4f       	sbci	r31, 0xFF	; 255
+  b2:	80 81       	ld	r24, Z
+  b4:	8b b9       	out	0x0b, r24	; 11
+  b6:	08 95       	ret
+
+000000b8 <setup>:
+}
+/****************************************/
+// NON-Interrupt subroutines
+void setup(void)
+{
+	cli();					// Desactivar interrupciones globales
+  b8:	f8 94       	cli
+
+	// Configuracion puerto D
+	DDRD = 0x7F;                 // PD0–PD6 salida (display)
+  ba:	8f e7       	ldi	r24, 0x7F	; 127
+  bc:	8a b9       	out	0x0a, r24	; 10
+	DDRD &= ~(1 << PD7);         // PD7 entrada
+  be:	8a b1       	in	r24, 0x0a	; 10
+  c0:	8f 77       	andi	r24, 0x7F	; 127
+  c2:	8a b9       	out	0x0a, r24	; 10
+	PORTD |= (1 << PD7);         // Pull-up botón inicio
+  c4:	8b b1       	in	r24, 0x0b	; 11
+  c6:	80 68       	ori	r24, 0x80	; 128
+  c8:	8b b9       	out	0x0b, r24	; 11
+
+	// Configuracion puerto B 
+	DDRB |= 0x0F;				// PB0-PD3 salida (leds jugador 1)
+  ca:	84 b1       	in	r24, 0x04	; 4
+  cc:	8f 60       	ori	r24, 0x0F	; 15
+  ce:	84 b9       	out	0x04, r24	; 4
+	PORTB &= ~0x0F;				// Leds apagados
+  d0:	85 b1       	in	r24, 0x05	; 5
+  d2:	80 7f       	andi	r24, 0xF0	; 240
+  d4:	85 b9       	out	0x05, r24	; 5
+
+	// Configuracion puerto C
+	DDRC |= 0x0F;				// PC0-PC3 salida (leds jugador 2)
+  d6:	87 b1       	in	r24, 0x07	; 7
+  d8:	8f 60       	ori	r24, 0x0F	; 15
+  da:	87 b9       	out	0x07, r24	; 7
+	PORTC &= ~0x0F;				// Leds apagados
+  dc:	88 b1       	in	r24, 0x08	; 8
+  de:	80 7f       	andi	r24, 0xF0	; 240
+  e0:	88 b9       	out	0x08, r24	; 8
+
+	DDRC &= ~((1 << PC4) | (1 << PC5));		// PC4 y PC5 como entrada
+  e2:	87 b1       	in	r24, 0x07	; 7
+  e4:	8f 7c       	andi	r24, 0xCF	; 207
+  e6:	87 b9       	out	0x07, r24	; 7
+	PORTC |= (1 << PC4) | (1 << PC5);		// Pull-ups botones de jugadores
+  e8:	88 b1       	in	r24, 0x08	; 8
+  ea:	80 63       	ori	r24, 0x30	; 48
+  ec:	88 b9       	out	0x08, r24	; 8
+
+	// Timer0 – modo normal
+	TCCR0A = 0x00;
+  ee:	14 bc       	out	0x24, r1	; 36
+	TCCR0B = (1 << CS02) | (1 << CS00);		// Prescaler 1024
+  f0:	85 e0       	ldi	r24, 0x05	; 5
+  f2:	85 bd       	out	0x25, r24	; 37
+	TIMSK0 = (1 << TOIE0);					// Habilitar overflow
+  f4:	81 e0       	ldi	r24, 0x01	; 1
+  f6:	80 93 6e 00 	sts	0x006E, r24	; 0x80006e <__TEXT_REGION_LENGTH__+0x7f806e>
+
+	// Display inicia en 0
+	display_show(0);
+  fa:	80 e0       	ldi	r24, 0x00	; 0
+  fc:	0e 94 53 00 	call	0xa6	; 0xa6 <display_show>
+	
+	race_init();
+ 100:	0e 94 c8 00 	call	0x190	; 0x190 <race_init>
+
+	sei();						// Habilitar interrupciones globales
+ 104:	78 94       	sei
+ 106:	08 95       	ret
+
+00000108 <main>:
+void setup(void);
+/****************************************/
+// Main Function
+int main(void)
+{
+	setup();				// configurar MCU
+ 108:	0e 94 5c 00 	call	0xb8	; 0xb8 <setup>
+
+	while (1)
+	{
+		race_update();		// Maneja la lógica por estados
+ 10c:	0e 94 d7 00 	call	0x1ae	; 0x1ae <race_update>
+ 110:	fd cf       	rjmp	.-6      	; 0x10c <main+0x4>
+
+00000112 <player_init>:
+
+#include "player.h"
+
+// Inicializacion de los parametros del jugador
+void player_init(player_t *p, uint8_t mask, volatile uint8_t *port)
+{
+ 112:	fc 01       	movw	r30, r24
+	p->value = 0;				// COntador en cero == leds apagados
+ 114:	10 82       	st	Z, r1
+	p->button_mask = mask;
+ 116:	61 83       	std	Z+1, r22	; 0x01
+	p->led_port = port;
+ 118:	53 83       	std	Z+3, r21	; 0x03
+ 11a:	42 83       	std	Z+2, r20	; 0x02
+	p->last_state = 1;			// Boton pull-up
+ 11c:	81 e0       	ldi	r24, 0x01	; 1
+ 11e:	84 83       	std	Z+4, r24	; 0x04
+ 120:	08 95       	ret
+
+00000122 <player_reset>:
+}
+
+// Reinicio de valores para una nueva carrera
+void player_reset(player_t *p)
+{
+ 122:	fc 01       	movw	r30, r24
+	p->value = 0;				// Contador en cero == leds apagados
+ 124:	10 82       	st	Z, r1
+	*(p->led_port) &= ~0x0F;	// Leds apagados
+ 126:	a2 81       	ldd	r26, Z+2	; 0x02
+ 128:	b3 81       	ldd	r27, Z+3	; 0x03
+ 12a:	8c 91       	ld	r24, X
+ 12c:	80 7f       	andi	r24, 0xF0	; 240
+ 12e:	8c 93       	st	X, r24
+	p->last_state = 1;			// Boton pull-up
+ 130:	81 e0       	ldi	r24, 0x01	; 1
+ 132:	84 83       	std	Z+4, r24	; 0x04
+ 134:	08 95       	ret
+
+00000136 <player_update>:
+}
+
+// Actualizacion del estado del jugador durante la carrera
+void player_update(player_t *p, volatile uint8_t *pin_reg)
+{
+ 136:	fc 01       	movw	r30, r24
+	uint8_t current = (*pin_reg & p->button_mask);
+ 138:	db 01       	movw	r26, r22
+ 13a:	8c 91       	ld	r24, X
+ 13c:	91 81       	ldd	r25, Z+1	; 0x01
+ 13e:	98 23       	and	r25, r24
+
+	// Deteccion de flanco de bajada
+	if (!current && p->last_state)
+ 140:	f1 f4       	brne	.+60     	; 0x17e <player_update+0x48>
+ 142:	84 81       	ldd	r24, Z+4	; 0x04
+ 144:	88 23       	and	r24, r24
+ 146:	d9 f0       	breq	.+54     	; 0x17e <player_update+0x48>
+	{
+		// Incremento del contador hasta el maximo. "4"
+		if (p->value < 4)
+ 148:	80 81       	ld	r24, Z
+ 14a:	84 30       	cpi	r24, 0x04	; 4
+ 14c:	10 f4       	brcc	.+4      	; 0x152 <player_update+0x1c>
+		p->value++;
+ 14e:	8f 5f       	subi	r24, 0xFF	; 255
+ 150:	80 83       	st	Z, r24
+		// Actualización de LEDs según el valor del contador
+		if (p->value < 4)
+ 152:	20 81       	ld	r18, Z
+ 154:	24 30       	cpi	r18, 0x04	; 4
+ 156:	78 f4       	brcc	.+30     	; 0x176 <player_update+0x40>
+		*(p->led_port) = (1 << (p->value - 1)); // 0001-0010-0100
+ 158:	a2 81       	ldd	r26, Z+2	; 0x02
+ 15a:	b3 81       	ldd	r27, Z+3	; 0x03
+ 15c:	30 e0       	ldi	r19, 0x00	; 0
+ 15e:	21 50       	subi	r18, 0x01	; 1
+ 160:	31 09       	sbc	r19, r1
+ 162:	41 e0       	ldi	r20, 0x01	; 1
+ 164:	50 e0       	ldi	r21, 0x00	; 0
+ 166:	ba 01       	movw	r22, r20
+ 168:	02 c0       	rjmp	.+4      	; 0x16e <player_update+0x38>
+ 16a:	66 0f       	add	r22, r22
+ 16c:	77 1f       	adc	r23, r23
+ 16e:	2a 95       	dec	r18
+ 170:	e2 f7       	brpl	.-8      	; 0x16a <player_update+0x34>
+ 172:	6c 93       	st	X, r22
+ 174:	04 c0       	rjmp	.+8      	; 0x17e <player_update+0x48>
+		else
+		*(p->led_port) = 0x0F;                  // ganador 1111
+ 176:	a2 81       	ldd	r26, Z+2	; 0x02
+ 178:	b3 81       	ldd	r27, Z+3	; 0x03
+ 17a:	8f e0       	ldi	r24, 0x0F	; 15
+ 17c:	8c 93       	st	X, r24
+	}
+	// Guardar estado actual del botón
+	p->last_state = current;
+ 17e:	94 83       	std	Z+4, r25	; 0x04
+ 180:	08 95       	ret
+
+00000182 <player_has_won>:
+}
+
+// Verificacion si el jugador ha llegado a la meta
+uint8_t player_has_won(player_t *p)
+{
+	return (p->value >= 4);
+ 182:	fc 01       	movw	r30, r24
+ 184:	90 81       	ld	r25, Z
+ 186:	81 e0       	ldi	r24, 0x01	; 1
+ 188:	94 30       	cpi	r25, 0x04	; 4
+ 18a:	08 f4       	brcc	.+2      	; 0x18e <player_has_won+0xc>
+ 18c:	80 e0       	ldi	r24, 0x00	; 0
+ 18e:	08 95       	ret
+
+00000190 <race_init>:
+static volatile uint16_t ticks;			// Contador de overflows
+
+void race_init(void)
+{
+	// Inicialización de los jugadores con su botón y puerto de LEDs
+	player_init(&jugador1, (1 << PC4), &PORTB);
+ 190:	45 e2       	ldi	r20, 0x25	; 37
+ 192:	50 e0       	ldi	r21, 0x00	; 0
+ 194:	60 e1       	ldi	r22, 0x10	; 16
+ 196:	8f e0       	ldi	r24, 0x0F	; 15
+ 198:	91 e0       	ldi	r25, 0x01	; 1
+ 19a:	0e 94 89 00 	call	0x112	; 0x112 <player_init>
+	player_init(&jugador2, (1 << PC5), &PORTC);
+ 19e:	48 e2       	ldi	r20, 0x28	; 40
+ 1a0:	50 e0       	ldi	r21, 0x00	; 0
+ 1a2:	60 e2       	ldi	r22, 0x20	; 32
+ 1a4:	8a e0       	ldi	r24, 0x0A	; 10
+ 1a6:	91 e0       	ldi	r25, 0x01	; 1
+ 1a8:	0e 94 89 00 	call	0x112	; 0x112 <player_init>
+ 1ac:	08 95       	ret
+
+000001ae <race_update>:
+}
+
+/****************************************/
+// Logica principal
+void race_update(void)
+{
+ 1ae:	cf 93       	push	r28
+	uint8_t inicio = !(PIND & (1 << PD7));	// Botón de inicio
+ 1b0:	c9 b1       	in	r28, 0x09	; 9
+
+	switch (estado_actual)
+ 1b2:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <__data_end>
+ 1b6:	81 30       	cpi	r24, 0x01	; 1
+ 1b8:	f1 f0       	breq	.+60     	; 0x1f6 <race_update+0x48>
+ 1ba:	30 f0       	brcs	.+12     	; 0x1c8 <race_update+0x1a>
+ 1bc:	82 30       	cpi	r24, 0x02	; 2
+ 1be:	51 f1       	breq	.+84     	; 0x214 <race_update+0x66>
+ 1c0:	83 30       	cpi	r24, 0x03	; 3
+ 1c2:	09 f4       	brne	.+2      	; 0x1c6 <race_update+0x18>
+ 1c4:	5e c0       	rjmp	.+188    	; 0x282 <race_update+0xd4>
+ 1c6:	61 c0       	rjmp	.+194    	; 0x28a <race_update+0xdc>
+	{
+		case ESTADO_IDLE:
+		// Estado de reposo
+		display_show(0);
+ 1c8:	80 e0       	ldi	r24, 0x00	; 0
+ 1ca:	0e 94 53 00 	call	0xa6	; 0xa6 <display_show>
+		player_reset(&jugador1);
+ 1ce:	8f e0       	ldi	r24, 0x0F	; 15
+ 1d0:	91 e0       	ldi	r25, 0x01	; 1
+ 1d2:	0e 94 91 00 	call	0x122	; 0x122 <player_reset>
+		player_reset(&jugador2);
+ 1d6:	8a e0       	ldi	r24, 0x0A	; 10
+ 1d8:	91 e0       	ldi	r25, 0x01	; 1
+ 1da:	0e 94 91 00 	call	0x122	; 0x122 <player_reset>
+
+		if (inicio)
+ 1de:	cc 23       	and	r28, r28
+ 1e0:	0c f4       	brge	.+2      	; 0x1e4 <race_update+0x36>
+ 1e2:	53 c0       	rjmp	.+166    	; 0x28a <race_update+0xdc>
+		{
+			countdown = 5;
+ 1e4:	85 e0       	ldi	r24, 0x05	; 5
+ 1e6:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <countdown>
+			display_show(5);
+ 1ea:	0e 94 53 00 	call	0xa6	; 0xa6 <display_show>
+			estado_actual = ESTADO_COUNTDOWN;
+ 1ee:	81 e0       	ldi	r24, 0x01	; 1
+ 1f0:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <__data_end>
+ 1f4:	4a c0       	rjmp	.+148    	; 0x28a <race_update+0xdc>
+		}
+		break;
+
+		case ESTADO_COUNTDOWN:
+		// Durante el conteo los LEDs permanecen apagados
+		PORTB &= ~0x0F;			// LEDs jugador 1
+ 1f6:	85 b1       	in	r24, 0x05	; 5
+ 1f8:	80 7f       	andi	r24, 0xF0	; 240
+ 1fa:	85 b9       	out	0x05, r24	; 5
+		PORTC &= ~0x0F;			// LEDs jugador 2
+ 1fc:	88 b1       	in	r24, 0x08	; 8
+ 1fe:	80 7f       	andi	r24, 0xF0	; 240
+ 200:	88 b9       	out	0x08, r24	; 8
+		
+		// Permite reiniciar el conteo
+		if (inicio)
+ 202:	cc 23       	and	r28, r28
+ 204:	0c f4       	brge	.+2      	; 0x208 <race_update+0x5a>
+ 206:	41 c0       	rjmp	.+130    	; 0x28a <race_update+0xdc>
+		{
+			countdown = 5;
+ 208:	85 e0       	ldi	r24, 0x05	; 5
+ 20a:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <countdown>
+			display_show(5);
+ 20e:	0e 94 53 00 	call	0xa6	; 0xa6 <display_show>
+ 212:	3b c0       	rjmp	.+118    	; 0x28a <race_update+0xdc>
+		}
+		break;
+
+		case ESTADO_CARRERA:
+		// Permite reiniciar la carrera desde este estado
+		if (inicio)
+ 214:	cc 23       	and	r28, r28
+ 216:	4c f0       	brlt	.+18     	; 0x22a <race_update+0x7c>
+		{
+			countdown = 5;
+ 218:	85 e0       	ldi	r24, 0x05	; 5
+ 21a:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <countdown>
+			display_show(5);
+ 21e:	0e 94 53 00 	call	0xa6	; 0xa6 <display_show>
+			estado_actual = ESTADO_COUNTDOWN;
+ 222:	81 e0       	ldi	r24, 0x01	; 1
+ 224:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <__data_end>
+			break;
+ 228:	30 c0       	rjmp	.+96     	; 0x28a <race_update+0xdc>
+		}
+		// Actualización de los jugadores
+		player_update(&jugador1, &PINC);
+ 22a:	66 e2       	ldi	r22, 0x26	; 38
+ 22c:	70 e0       	ldi	r23, 0x00	; 0
+ 22e:	8f e0       	ldi	r24, 0x0F	; 15
+ 230:	91 e0       	ldi	r25, 0x01	; 1
+ 232:	0e 94 9b 00 	call	0x136	; 0x136 <player_update>
+		player_update(&jugador2, &PINC);
+ 236:	66 e2       	ldi	r22, 0x26	; 38
+ 238:	70 e0       	ldi	r23, 0x00	; 0
+ 23a:	8a e0       	ldi	r24, 0x0A	; 10
+ 23c:	91 e0       	ldi	r25, 0x01	; 1
+ 23e:	0e 94 9b 00 	call	0x136	; 0x136 <player_update>
+		// Detección de ganador
+		if (player_has_won(&jugador1))
+ 242:	8f e0       	ldi	r24, 0x0F	; 15
+ 244:	91 e0       	ldi	r25, 0x01	; 1
+ 246:	0e 94 c1 00 	call	0x182	; 0x182 <player_has_won>
+ 24a:	88 23       	and	r24, r24
+ 24c:	51 f0       	breq	.+20     	; 0x262 <race_update+0xb4>
+		{
+			PORTB = 0x0F;		// LEDs jugador 1 encendidos
+ 24e:	8f e0       	ldi	r24, 0x0F	; 15
+ 250:	85 b9       	out	0x05, r24	; 5
+			PORTC = 0x00;		// LEDs jugador 2 apagados
+ 252:	18 b8       	out	0x08, r1	; 8
+			display_show(1);	// Mostrar numero 1 en display
+ 254:	81 e0       	ldi	r24, 0x01	; 1
+ 256:	0e 94 53 00 	call	0xa6	; 0xa6 <display_show>
+			estado_actual = ESTADO_GANADOR;
+ 25a:	83 e0       	ldi	r24, 0x03	; 3
+ 25c:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <__data_end>
+ 260:	14 c0       	rjmp	.+40     	; 0x28a <race_update+0xdc>
+		}
+		else if (player_has_won(&jugador2))
+ 262:	8a e0       	ldi	r24, 0x0A	; 10
+ 264:	91 e0       	ldi	r25, 0x01	; 1
+ 266:	0e 94 c1 00 	call	0x182	; 0x182 <player_has_won>
+ 26a:	88 23       	and	r24, r24
+ 26c:	71 f0       	breq	.+28     	; 0x28a <race_update+0xdc>
+		{
+			PORTC = 0x0F;		// LEDs jugador 2 encendidos
+ 26e:	8f e0       	ldi	r24, 0x0F	; 15
+ 270:	88 b9       	out	0x08, r24	; 8
+			PORTB = 0x00;		// LEDs jugador 1 apagados
+ 272:	15 b8       	out	0x05, r1	; 5
+			display_show(2);	// Msotrar numero 2 en display
+ 274:	82 e0       	ldi	r24, 0x02	; 2
+ 276:	0e 94 53 00 	call	0xa6	; 0xa6 <display_show>
+			estado_actual = ESTADO_GANADOR;
+ 27a:	83 e0       	ldi	r24, 0x03	; 3
+ 27c:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <__data_end>
+ 280:	04 c0       	rjmp	.+8      	; 0x28a <race_update+0xdc>
+		}
+		break;
+
+		case ESTADO_GANADOR:
+		// Espera a que se presione inicio para reiniciar el sistema
+		if (inicio)
+ 282:	cc 23       	and	r28, r28
+ 284:	14 f0       	brlt	.+4      	; 0x28a <race_update+0xdc>
+		estado_actual = ESTADO_IDLE;
+ 286:	10 92 06 01 	sts	0x0106, r1	; 0x800106 <__data_end>
+		break;
+	}
+}
+ 28a:	cf 91       	pop	r28
+ 28c:	08 95       	ret
+
+0000028e <__vector_16>:
+
+/****************************************/
+// ISR Timer0 Overflow (~16.38 ms)
+ISR(TIMER0_OVF_vect)
+{
+ 28e:	1f 92       	push	r1
+ 290:	0f 92       	push	r0
+ 292:	0f b6       	in	r0, 0x3f	; 63
+ 294:	0f 92       	push	r0
+ 296:	11 24       	eor	r1, r1
+ 298:	2f 93       	push	r18
+ 29a:	3f 93       	push	r19
+ 29c:	4f 93       	push	r20
+ 29e:	5f 93       	push	r21
+ 2a0:	6f 93       	push	r22
+ 2a2:	7f 93       	push	r23
+ 2a4:	8f 93       	push	r24
+ 2a6:	9f 93       	push	r25
+ 2a8:	af 93       	push	r26
+ 2aa:	bf 93       	push	r27
+ 2ac:	ef 93       	push	r30
+ 2ae:	ff 93       	push	r31
+	if (estado_actual == ESTADO_COUNTDOWN)
+ 2b0:	80 91 06 01 	lds	r24, 0x0106	; 0x800106 <__data_end>
+ 2b4:	81 30       	cpi	r24, 0x01	; 1
+ 2b6:	61 f5       	brne	.+88     	; 0x310 <__vector_16+0x82>
+	{
+		ticks++;
+ 2b8:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <ticks>
+ 2bc:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <ticks+0x1>
+ 2c0:	01 96       	adiw	r24, 0x01	; 1
+ 2c2:	90 93 08 01 	sts	0x0108, r25	; 0x800108 <ticks+0x1>
+ 2c6:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <ticks>
+		if (ticks >= 61)			// 61 overflows ? 1 segundo
+ 2ca:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <ticks>
+ 2ce:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <ticks+0x1>
+ 2d2:	cd 97       	sbiw	r24, 0x3d	; 61
+ 2d4:	e8 f0       	brcs	.+58     	; 0x310 <__vector_16+0x82>
+		{
+			ticks = 0;
+ 2d6:	10 92 08 01 	sts	0x0108, r1	; 0x800108 <ticks+0x1>
+ 2da:	10 92 07 01 	sts	0x0107, r1	; 0x800107 <ticks>
+			if (countdown > 0)
+ 2de:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <countdown>
+ 2e2:	88 23       	and	r24, r24
+ 2e4:	51 f0       	breq	.+20     	; 0x2fa <__vector_16+0x6c>
+			{
+				countdown--;
+ 2e6:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <countdown>
+ 2ea:	81 50       	subi	r24, 0x01	; 1
+ 2ec:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <countdown>
+				display_show(countdown);
+ 2f0:	80 91 09 01 	lds	r24, 0x0109	; 0x800109 <countdown>
+ 2f4:	0e 94 53 00 	call	0xa6	; 0xa6 <display_show>
+ 2f8:	0b c0       	rjmp	.+22     	; 0x310 <__vector_16+0x82>
+			}
+			else
+			{
+				// Finaliza el conteo e inicia la carrera
+				player_reset(&jugador1);
+ 2fa:	8f e0       	ldi	r24, 0x0F	; 15
+ 2fc:	91 e0       	ldi	r25, 0x01	; 1
+ 2fe:	0e 94 91 00 	call	0x122	; 0x122 <player_reset>
+				player_reset(&jugador2);
+ 302:	8a e0       	ldi	r24, 0x0A	; 10
+ 304:	91 e0       	ldi	r25, 0x01	; 1
+ 306:	0e 94 91 00 	call	0x122	; 0x122 <player_reset>
+				estado_actual = ESTADO_CARRERA;
+ 30a:	82 e0       	ldi	r24, 0x02	; 2
+ 30c:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <__data_end>
+			}
+		}
+	}
+ 310:	ff 91       	pop	r31
+ 312:	ef 91       	pop	r30
+ 314:	bf 91       	pop	r27
+ 316:	af 91       	pop	r26
+ 318:	9f 91       	pop	r25
+ 31a:	8f 91       	pop	r24
+ 31c:	7f 91       	pop	r23
+ 31e:	6f 91       	pop	r22
+ 320:	5f 91       	pop	r21
+ 322:	4f 91       	pop	r20
+ 324:	3f 91       	pop	r19
+ 326:	2f 91       	pop	r18
+ 328:	0f 90       	pop	r0
+ 32a:	0f be       	out	0x3f, r0	; 63
+ 32c:	0f 90       	pop	r0
+ 32e:	1f 90       	pop	r1
+ 330:	18 95       	reti
+
+00000332 <_exit>:
+ 332:	f8 94       	cli
+
+00000334 <__stop_program>:
+ 334:	ff cf       	rjmp	.-2      	; 0x334 <__stop_program>
