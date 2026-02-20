@@ -1,0 +1,408 @@
+
+I2C.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00800100  00800100  000002c6  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000252  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .bss          00000005  00800100  00800100  000002c6  2**0
+                  ALLOC
+  3 .comment      00000030  00000000  00000000  000002c6  2**0
+                  CONTENTS, READONLY
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000002f8  2**2
+                  CONTENTS, READONLY
+  5 .debug_aranges 00000088  00000000  00000000  00000338  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_info   00000a31  00000000  00000000  000003c0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_abbrev 0000080b  00000000  00000000  00000df1  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_line   0000067c  00000000  00000000  000015fc  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_frame  00000104  00000000  00000000  00001c78  2**2
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_str    0000047e  00000000  00000000  00001d7c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 11 .debug_loc    00000262  00000000  00000000  000021fa  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 12 .debug_ranges 00000068  00000000  00000000  0000245c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	0c 94 34 00 	jmp	0x68	; 0x68 <__ctors_end>
+   4:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   8:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+   c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  10:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  14:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  18:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  1c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  20:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  24:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  28:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  2c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  30:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  34:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  38:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  3c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  40:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  44:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  48:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  4c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  50:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  54:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  58:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  5c:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+  60:	0c 94 cb 00 	jmp	0x196	; 0x196 <__vector_24>
+  64:	0c 94 46 00 	jmp	0x8c	; 0x8c <__bad_interrupt>
+
+00000068 <__ctors_end>:
+  68:	11 24       	eor	r1, r1
+  6a:	1f be       	out	0x3f, r1	; 63
+  6c:	cf ef       	ldi	r28, 0xFF	; 255
+  6e:	d8 e0       	ldi	r29, 0x08	; 8
+  70:	de bf       	out	0x3e, r29	; 62
+  72:	cd bf       	out	0x3d, r28	; 61
+
+00000074 <__do_clear_bss>:
+  74:	21 e0       	ldi	r18, 0x01	; 1
+  76:	a0 e0       	ldi	r26, 0x00	; 0
+  78:	b1 e0       	ldi	r27, 0x01	; 1
+  7a:	01 c0       	rjmp	.+2      	; 0x7e <.do_clear_bss_start>
+
+0000007c <.do_clear_bss_loop>:
+  7c:	1d 92       	st	X+, r1
+
+0000007e <.do_clear_bss_start>:
+  7e:	a5 30       	cpi	r26, 0x05	; 5
+  80:	b2 07       	cpc	r27, r18
+  82:	e1 f7       	brne	.-8      	; 0x7c <.do_clear_bss_loop>
+  84:	0e 94 6a 00 	call	0xd4	; 0xd4 <main>
+  88:	0c 94 27 01 	jmp	0x24e	; 0x24e <_exit>
+
+0000008c <__bad_interrupt>:
+  8c:	0c 94 00 00 	jmp	0	; 0x0 <__vectors>
+
+00000090 <I2C_Slave_Init>:
+		PORTD &= ~(1<<PORTD3);
+	}
+	if(valor & 0b00000001){
+		PORTD |= (1<<PORTD2);
+		}else{
+		PORTD &= ~(1<<PORTD2);
+  90:	97 b1       	in	r25, 0x07	; 7
+  92:	9f 7c       	andi	r25, 0xCF	; 207
+  94:	97 b9       	out	0x07, r25	; 7
+  96:	88 0f       	add	r24, r24
+  98:	80 93 ba 00 	sts	0x00BA, r24	; 0x8000ba <__TEXT_REGION_LENGTH__+0x7f80ba>
+  9c:	85 e4       	ldi	r24, 0x45	; 69
+  9e:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+  a2:	08 95       	ret
+
+000000a4 <LecturaADC>:
+	}
+}
+
+uint8_t LecturaADC(uint8_t PIN){ //Cambiar a uint16_t cuando se vaya a usar servos
+	 ADMUX = (ADMUX & 0xF0) | PIN; // Seleccionar canal
+  a4:	ec e7       	ldi	r30, 0x7C	; 124
+  a6:	f0 e0       	ldi	r31, 0x00	; 0
+  a8:	90 81       	ld	r25, Z
+  aa:	90 7f       	andi	r25, 0xF0	; 240
+  ac:	89 2b       	or	r24, r25
+  ae:	80 83       	st	Z, r24
+	 ADCSRA |= (1 << ADSC); // Iniciar conversión
+  b0:	ea e7       	ldi	r30, 0x7A	; 122
+  b2:	f0 e0       	ldi	r31, 0x00	; 0
+  b4:	80 81       	ld	r24, Z
+  b6:	80 64       	ori	r24, 0x40	; 64
+  b8:	80 83       	st	Z, r24
+	 while (ADCSRA & (1 << ADSC)); // Esperar a que termine
+  ba:	80 91 7a 00 	lds	r24, 0x007A	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
+  be:	86 fd       	sbrc	r24, 6
+  c0:	fc cf       	rjmp	.-8      	; 0xba <LecturaADC+0x16>
+	 uint8_t adc8 = ADC >> 2;
+  c2:	80 91 78 00 	lds	r24, 0x0078	; 0x800078 <__TEXT_REGION_LENGTH__+0x7f8078>
+  c6:	90 91 79 00 	lds	r25, 0x0079	; 0x800079 <__TEXT_REGION_LENGTH__+0x7f8079>
+  ca:	96 95       	lsr	r25
+  cc:	87 95       	ror	r24
+  ce:	96 95       	lsr	r25
+  d0:	87 95       	ror	r24
+	 return adc8; //cambiar a solo ADC cuando se vaya a usar servos
+	 
+ }
+  d2:	08 95       	ret
+
+000000d4 <main>:
+
+void initADC(void);
+
+int main(void)
+{
+	DDRD |= (1<<DDD2);
+  d4:	8a b1       	in	r24, 0x0a	; 10
+  d6:	84 60       	ori	r24, 0x04	; 4
+  d8:	8a b9       	out	0x0a, r24	; 10
+	PORTD &= ~(1<<PORTD2);
+  da:	8b b1       	in	r24, 0x0b	; 11
+  dc:	8b 7f       	andi	r24, 0xFB	; 251
+  de:	8b b9       	out	0x0b, r24	; 11
+	
+	DDRD |= (1<<DDD2)|(1<<DDD3)|(1<<DDD4)|(1<<DDD5)|(1<<DDD6)|(1<<DDD7);
+  e0:	8a b1       	in	r24, 0x0a	; 10
+  e2:	8c 6f       	ori	r24, 0xFC	; 252
+  e4:	8a b9       	out	0x0a, r24	; 10
+	DDRB |= (1<<DDB0)|(1<<DDB1); //Bits conectados a LEDS
+  e6:	84 b1       	in	r24, 0x04	; 4
+  e8:	83 60       	ori	r24, 0x03	; 3
+  ea:	84 b9       	out	0x04, r24	; 4
+		
+	//LEDS a cero
+	PORTB &= ~((1<<PORTB0)|(1<<PORTB1));
+  ec:	85 b1       	in	r24, 0x05	; 5
+  ee:	8c 7f       	andi	r24, 0xFC	; 252
+  f0:	85 b9       	out	0x05, r24	; 5
+	PORTD &= ~((1<<PORTD2)|(1<<PORTD3)|(1<<PORTD4)|(1<<PORTD5)|(1<<PORTD6)|(1<<PORTD7));
+  f2:	8b b1       	in	r24, 0x0b	; 11
+  f4:	83 70       	andi	r24, 0x03	; 3
+  f6:	8b b9       	out	0x0b, r24	; 11
+	
+	//Configuracion de ADC
+	ADMUX |= (1 << ADLAR); 
+  f8:	ec e7       	ldi	r30, 0x7C	; 124
+  fa:	f0 e0       	ldi	r31, 0x00	; 0
+  fc:	80 81       	ld	r24, Z
+  fe:	80 62       	ori	r24, 0x20	; 32
+ 100:	80 83       	st	Z, r24
+	ADMUX = (1 << REFS0); // AVcc como referencia. Quitar la configuracion de ADLAR cuando se usen servos
+ 102:	80 e4       	ldi	r24, 0x40	; 64
+ 104:	80 83       	st	Z, r24
+	ADCSRA = (1 << ADEN) | (1 << ADPS2) | (1 << ADPS1) | (1 << ADPS0); // Prescaler 128
+ 106:	87 e8       	ldi	r24, 0x87	; 135
+ 108:	80 93 7a 00 	sts	0x007A, r24	; 0x80007a <__TEXT_REGION_LENGTH__+0x7f807a>
+	
+	// Salida PWM en D11 (OC2A)
+	DDRB |= (1 << DDB3);
+ 10c:	84 b1       	in	r24, 0x04	; 4
+ 10e:	88 60       	ori	r24, 0x08	; 8
+ 110:	84 b9       	out	0x04, r24	; 4
+	// Fast PWM, no invertido
+	TCCR2A = (1 << COM2A1) | (1 << WGM21) | (1 << WGM20);
+ 112:	83 e8       	ldi	r24, 0x83	; 131
+ 114:	80 93 b0 00 	sts	0x00B0, r24	; 0x8000b0 <__TEXT_REGION_LENGTH__+0x7f80b0>
+	TCCR2B = (1 << CS21);   // Prescaler 8 (~7.8kHz)
+ 118:	82 e0       	ldi	r24, 0x02	; 2
+ 11a:	80 93 b1 00 	sts	0x00B1, r24	; 0x8000b1 <__TEXT_REGION_LENGTH__+0x7f80b1>
+
+	OCR2A = 0;  // Motor apagado al inicio
+ 11e:	10 92 b3 00 	sts	0x00B3, r1	; 0x8000b3 <__TEXT_REGION_LENGTH__+0x7f80b3>
+	
+	I2C_Slave_Init(SlaverAddress); // Se define como slave con la direccion SlaveAddress
+ 122:	80 e3       	ldi	r24, 0x30	; 48
+ 124:	0e 94 48 00 	call	0x90	; 0x90 <I2C_Slave_Init>
+	
+	sei();	//Habilitar interrupciones
+ 128:	78 94       	sei
+			buffer = 0;
+		}*/
+		//refreshPORT(buffer);
+		
+		//Inicializamos secuencia de adc
+		Foto1 = LecturaADC(0);
+ 12a:	80 e0       	ldi	r24, 0x00	; 0
+ 12c:	0e 94 52 00 	call	0xa4	; 0xa4 <LecturaADC>
+ 130:	80 93 02 01 	sts	0x0102, r24	; 0x800102 <Foto1>
+		Foto2 = LecturaADC(1);
+ 134:	81 e0       	ldi	r24, 0x01	; 1
+ 136:	0e 94 52 00 	call	0xa4	; 0xa4 <LecturaADC>
+ 13a:	80 93 01 01 	sts	0x0101, r24	; 0x800101 <Foto2>
+		Foto3 = LecturaADC(2);
+ 13e:	82 e0       	ldi	r24, 0x02	; 2
+ 140:	0e 94 52 00 	call	0xa4	; 0xa4 <LecturaADC>
+ 144:	80 93 00 01 	sts	0x0100, r24	; 0x800100 <__DATA_REGION_ORIGIN__>
+		
+		valorADC = ((uint16_t)Foto1+Foto2+Foto3)/3;
+ 148:	90 91 02 01 	lds	r25, 0x0102	; 0x800102 <Foto1>
+ 14c:	20 91 01 01 	lds	r18, 0x0101	; 0x800101 <Foto2>
+ 150:	30 e0       	ldi	r19, 0x00	; 0
+ 152:	29 0f       	add	r18, r25
+ 154:	31 1d       	adc	r19, r1
+ 156:	28 0f       	add	r18, r24
+ 158:	31 1d       	adc	r19, r1
+ 15a:	ab ea       	ldi	r26, 0xAB	; 171
+ 15c:	ba ea       	ldi	r27, 0xAA	; 170
+ 15e:	0e 94 18 01 	call	0x230	; 0x230 <__umulhisi3>
+ 162:	96 95       	lsr	r25
+ 164:	87 95       	ror	r24
+ 166:	80 93 03 01 	sts	0x0103, r24	; 0x800103 <valorADC>
+		
+		if (buffer & 0x01){ //Aqui se determina si el maestro esta pidiendo encender el relay
+ 16a:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <buffer>
+ 16e:	80 ff       	sbrs	r24, 0
+ 170:	04 c0       	rjmp	.+8      	; 0x17a <main+0xa6>
+			PORTD |= (1<<PORTD3);
+ 172:	8b b1       	in	r24, 0x0b	; 11
+ 174:	88 60       	ori	r24, 0x08	; 8
+ 176:	8b b9       	out	0x0b, r24	; 11
+ 178:	03 c0       	rjmp	.+6      	; 0x180 <main+0xac>
+		}else{	
+			PORTD &= ~(1<<PORTD3); //sino se apaga el relay
+ 17a:	8b b1       	in	r24, 0x0b	; 11
+ 17c:	87 7f       	andi	r24, 0xF7	; 247
+ 17e:	8b b9       	out	0x0b, r24	; 11
+		}
+		
+		OCR2A = buffer;
+ 180:	80 91 04 01 	lds	r24, 0x0104	; 0x800104 <buffer>
+ 184:	80 93 b3 00 	sts	0x00B3, r24	; 0x8000b3 <__TEXT_REGION_LENGTH__+0x7f80b3>
+	#else
+		//round up by default
+		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
+	#endif
+
+	__builtin_avr_delay_cycles(__ticks_dc);
+ 188:	87 e8       	ldi	r24, 0x87	; 135
+ 18a:	93 e1       	ldi	r25, 0x13	; 19
+ 18c:	01 97       	sbiw	r24, 0x01	; 1
+ 18e:	f1 f7       	brne	.-4      	; 0x18c <main+0xb8>
+ 190:	00 c0       	rjmp	.+0      	; 0x192 <main+0xbe>
+ 192:	00 00       	nop
+ 194:	ca cf       	rjmp	.-108    	; 0x12a <main+0x56>
+
+00000196 <__vector_24>:
+		
+	}
+}
+
+
+ISR(TWI_vect){
+ 196:	1f 92       	push	r1
+ 198:	0f 92       	push	r0
+ 19a:	0f b6       	in	r0, 0x3f	; 63
+ 19c:	0f 92       	push	r0
+ 19e:	11 24       	eor	r1, r1
+ 1a0:	8f 93       	push	r24
+ 1a2:	ef 93       	push	r30
+ 1a4:	ff 93       	push	r31
+	uint8_t estado = TWSR & 0xFC; // Nos quedamos unicamente con los bist de estado TWI Status
+ 1a6:	80 91 b9 00 	lds	r24, 0x00B9	; 0x8000b9 <__TEXT_REGION_LENGTH__+0x7f80b9>
+ 1aa:	8c 7f       	andi	r24, 0xFC	; 252
+	switch(estado){
+ 1ac:	80 3a       	cpi	r24, 0xA0	; 160
+ 1ae:	89 f1       	breq	.+98     	; 0x212 <__vector_24+0x7c>
+ 1b0:	58 f4       	brcc	.+22     	; 0x1c8 <__vector_24+0x32>
+ 1b2:	80 37       	cpi	r24, 0x70	; 112
+ 1b4:	a1 f0       	breq	.+40     	; 0x1de <__vector_24+0x48>
+ 1b6:	18 f4       	brcc	.+6      	; 0x1be <__vector_24+0x28>
+ 1b8:	80 36       	cpi	r24, 0x60	; 96
+ 1ba:	89 f0       	breq	.+34     	; 0x1de <__vector_24+0x48>
+ 1bc:	2e c0       	rjmp	.+92     	; 0x21a <__vector_24+0x84>
+ 1be:	80 38       	cpi	r24, 0x80	; 128
+ 1c0:	91 f0       	breq	.+36     	; 0x1e6 <__vector_24+0x50>
+ 1c2:	80 39       	cpi	r24, 0x90	; 144
+ 1c4:	81 f0       	breq	.+32     	; 0x1e6 <__vector_24+0x50>
+ 1c6:	29 c0       	rjmp	.+82     	; 0x21a <__vector_24+0x84>
+ 1c8:	88 3b       	cpi	r24, 0xB8	; 184
+ 1ca:	a9 f0       	breq	.+42     	; 0x1f6 <__vector_24+0x60>
+ 1cc:	18 f4       	brcc	.+6      	; 0x1d4 <__vector_24+0x3e>
+ 1ce:	88 3a       	cpi	r24, 0xA8	; 168
+ 1d0:	91 f0       	breq	.+36     	; 0x1f6 <__vector_24+0x60>
+ 1d2:	23 c0       	rjmp	.+70     	; 0x21a <__vector_24+0x84>
+ 1d4:	80 3c       	cpi	r24, 0xC0	; 192
+ 1d6:	b9 f0       	breq	.+46     	; 0x206 <__vector_24+0x70>
+ 1d8:	88 3c       	cpi	r24, 0xC8	; 200
+ 1da:	a9 f0       	breq	.+42     	; 0x206 <__vector_24+0x70>
+ 1dc:	1e c0       	rjmp	.+60     	; 0x21a <__vector_24+0x84>
+		// Slave debe de recibir dato
+		case 0x60: //SLA+W recibido
+		case 0x70: // General call
+		TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWIE)|(1<<TWEA);
+ 1de:	85 ec       	ldi	r24, 0xC5	; 197
+ 1e0:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+		break;
+ 1e4:	1d c0       	rjmp	.+58     	; 0x220 <__vector_24+0x8a>
+		
+		case 0x80: // Dato recibido, ACK enviado
+		case 0x90: // Dato recibido General Call, ACK enviado
+		buffer = TWDR;
+ 1e6:	80 91 bb 00 	lds	r24, 0x00BB	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+ 1ea:	80 93 04 01 	sts	0x0104, r24	; 0x800104 <buffer>
+		TWCR = (1<< TWINT)|(1<<TWEN)|(1<<TWIE)|(1<<TWEA);
+ 1ee:	85 ec       	ldi	r24, 0xC5	; 197
+ 1f0:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+		break;
+ 1f4:	15 c0       	rjmp	.+42     	; 0x220 <__vector_24+0x8a>
+		
+		//Slave debe transmitir dato
+		case 0xA8: // SLA+R recibido
+		case 0xB8: // Dato transmitido, ACK recibido
+		TWDR = valorADC; // dato a enviar
+ 1f6:	80 91 03 01 	lds	r24, 0x0103	; 0x800103 <valorADC>
+ 1fa:	80 93 bb 00 	sts	0x00BB, r24	; 0x8000bb <__TEXT_REGION_LENGTH__+0x7f80bb>
+		TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWIE)|(1<<TWEA);
+ 1fe:	85 ec       	ldi	r24, 0xC5	; 197
+ 200:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+		break;
+ 204:	0d c0       	rjmp	.+26     	; 0x220 <__vector_24+0x8a>
+		
+		case 0xC0: //Dato transmitido, NACK recibido
+		case 0xC8: // Ultimo dato transmitido
+		TWCR = 0;
+ 206:	ec eb       	ldi	r30, 0xBC	; 188
+ 208:	f0 e0       	ldi	r31, 0x00	; 0
+ 20a:	10 82       	st	Z, r1
+		TWCR = (1<<TWEN)|(1<<TWEA)|(1<<TWIE);
+ 20c:	85 e4       	ldi	r24, 0x45	; 69
+ 20e:	80 83       	st	Z, r24
+		break;
+ 210:	07 c0       	rjmp	.+14     	; 0x220 <__vector_24+0x8a>
+		
+		case 0xA0: // STOP o repeated START recibido como slave
+		TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWIE)|(1<<TWEA);
+ 212:	85 ec       	ldi	r24, 0xC5	; 197
+ 214:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+		break;
+ 218:	03 c0       	rjmp	.+6      	; 0x220 <__vector_24+0x8a>
+		// Cualquier error
+		default:
+		TWCR = (1<<TWINT)|(1<<TWEN)|(1<<TWIE)|(1<<TWEA);
+ 21a:	85 ec       	ldi	r24, 0xC5	; 197
+ 21c:	80 93 bc 00 	sts	0x00BC, r24	; 0x8000bc <__TEXT_REGION_LENGTH__+0x7f80bc>
+		break;
+	}
+}
+ 220:	ff 91       	pop	r31
+ 222:	ef 91       	pop	r30
+ 224:	8f 91       	pop	r24
+ 226:	0f 90       	pop	r0
+ 228:	0f be       	out	0x3f, r0	; 63
+ 22a:	0f 90       	pop	r0
+ 22c:	1f 90       	pop	r1
+ 22e:	18 95       	reti
+
+00000230 <__umulhisi3>:
+ 230:	a2 9f       	mul	r26, r18
+ 232:	b0 01       	movw	r22, r0
+ 234:	b3 9f       	mul	r27, r19
+ 236:	c0 01       	movw	r24, r0
+ 238:	a3 9f       	mul	r26, r19
+ 23a:	70 0d       	add	r23, r0
+ 23c:	81 1d       	adc	r24, r1
+ 23e:	11 24       	eor	r1, r1
+ 240:	91 1d       	adc	r25, r1
+ 242:	b2 9f       	mul	r27, r18
+ 244:	70 0d       	add	r23, r0
+ 246:	81 1d       	adc	r24, r1
+ 248:	11 24       	eor	r1, r1
+ 24a:	91 1d       	adc	r25, r1
+ 24c:	08 95       	ret
+
+0000024e <_exit>:
+ 24e:	f8 94       	cli
+
+00000250 <__stop_program>:
+ 250:	ff cf       	rjmp	.-2      	; 0x250 <__stop_program>
