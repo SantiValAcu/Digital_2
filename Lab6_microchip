@@ -1,0 +1,138 @@
+/*
+ * Lab6.c
+ *
+ * Created: 12/3/2026 17:23:21
+ * Author : santi
+ */ 
+/****************************************/
+// Encabezado (Libraries)
+#define F_CPU 16000000UL
+#include <avr/io.h>
+#include <stdint.h> 
+#include <avr/interrupt.h>
+#include <util/delay.h>
+// Nombres variables
+char estado_anterior = 0;
+/****************************************/
+// Function prototypes
+void setup(void);
+void UART_init(void);
+void UART_send(char data);
+/****************************************/
+// Main Function
+int main(void)
+{
+    setup();				// configurar MCU
+	
+    while (1) 
+    {
+		// ARRIBA
+		if(!(PIND & (1<<PD2)))
+		{
+			if(estado_anterior != 'U')
+			{
+				UART_send('U');
+				estado_anterior = 'U';
+			}
+		}
+		// ABAJO
+		else if(!(PIND & (1<<PD3)))
+		{
+			if(estado_anterior != 'D')
+			{
+				UART_send('D');
+				estado_anterior = 'D';
+			}
+		}
+		// IZQUIERDA
+		else if(!(PIND & (1<<PD4)))
+		{
+			if(estado_anterior != 'L')
+			{
+				UART_send('L');
+				estado_anterior = 'L';
+			}
+		}
+		// DERECHA
+		else if(!(PIND & (1<<PD5)))
+		{
+			if(estado_anterior != 'R')
+			{
+				UART_send('R');
+				estado_anterior = 'R';
+			}
+		}
+		// ACCION A
+		else if(!(PIND & (1<<PD6)))
+		{
+			if(estado_anterior != 'A')
+			{
+				UART_send('A');
+				estado_anterior = 'A';
+			}
+		}
+		// ACCION B
+		else if(!(PIND & (1<<PD7)))
+		{
+			if(estado_anterior != 'B')
+			{
+				UART_send('B');
+				estado_anterior = 'B';
+			}
+		}
+
+		else
+		{
+			estado_anterior = 0;
+		}
+		_delay_ms(50);
+	}
+}
+/****************************************/
+// NON-Interrupt subroutines
+void setup(void)
+{
+	cli();					// Desactivar interrupciones globales
+	// BOTONES COMO ENTRADA
+	DDRD &= ~(1<<PD2);
+	DDRD &= ~(1<<PD3);
+	DDRD &= ~(1<<PD4);
+	DDRD &= ~(1<<PD5);
+	DDRD &= ~(1<<PD6);
+	DDRD &= ~(1<<PD7);
+	// PULL-UP INTERNOS
+	PORTD |= (1<<PD2);
+	PORTD |= (1<<PD3);
+	PORTD |= (1<<PD4);
+	PORTD |= (1<<PD5);
+	PORTD |= (1<<PD6);
+	PORTD |= (1<<PD7);
+	// INICIALIZAR UART
+	UART_init();
+	sei();						// Habilitar interrupciones globales
+}
+/****************************************/
+// UART configuration
+void UART_init(void)
+{
+	// Activar doble velocidad (clave)
+	UCSR0A |= (1<<U2X0);
+
+	// 115200 baud con F_CPU = 16MHz
+	UBRR0H = 0;
+	UBRR0L = 16;;
+	// Habilitar transmisión
+	UCSR0B = (1<<TXEN0);
+	// 8 bits de datos
+	UCSR0C = (1<<UCSZ01) | (1<<UCSZ00);
+}
+
+/****************************************/
+// Enviar dato por UART
+void UART_send(char data)
+{
+	while(!(UCSR0A & (1<<UDRE0)));
+	UDR0 = data;
+}
+
+/****************************************/
