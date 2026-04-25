@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2024 STMicroelectronics.
+  * Copyright (c) 2026 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -22,10 +22,6 @@
 #include "stm32f4xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-extern uint16_t Timer1, Timer2;
-
-extern DMA_HandleTypeDef hdma_spi_tx;
-extern SPI_HandleTypeDef hspi1;
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -59,8 +55,7 @@ extern SPI_HandleTypeDef hspi1;
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern UART_HandleTypeDef huart4;
-extern UART_HandleTypeDef huart5;
+
 /* USER CODE BEGIN EV */
 
 /* USER CODE END EV */
@@ -188,16 +183,11 @@ void PendSV_Handler(void)
 void SysTick_Handler(void)
 {
   /* USER CODE BEGIN SysTick_IRQn 0 */
-if(Timer1 > 0){
-	Timer1--;
-}
-if(Timer2 > 0){
-	Timer2--;
-}
+
   /* USER CODE END SysTick_IRQn 0 */
   HAL_IncTick();
   /* USER CODE BEGIN SysTick_IRQn 1 */
-  HAL_SYSTICK_IRQHandler();
+
   /* USER CODE END SysTick_IRQn 1 */
 }
 
@@ -207,34 +197,6 @@ if(Timer2 > 0){
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f4xx.s).                    */
 /******************************************************************************/
-
-/**
-  * @brief This function handles UART4 global interrupt.
-  */
-void UART4_IRQHandler(void)
-{
-  /* USER CODE BEGIN UART4_IRQn 0 */
-
-  /* USER CODE END UART4_IRQn 0 */
-  HAL_UART_IRQHandler(&huart4);
-  /* USER CODE BEGIN UART4_IRQn 1 */
-
-  /* USER CODE END UART4_IRQn 1 */
-}
-
-/**
-  * @brief This function handles UART5 global interrupt.
-  */
-void UART5_IRQHandler(void)
-{
-  /* USER CODE BEGIN UART5_IRQn 0 */
-
-  /* USER CODE END UART5_IRQn 0 */
-  HAL_UART_IRQHandler(&huart5);
-  /* USER CODE BEGIN UART5_IRQn 1 */
-
-  /* USER CODE END UART5_IRQn 1 */
-}
 
 /* USER CODE BEGIN 1 */
 
